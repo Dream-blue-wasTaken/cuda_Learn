@@ -7,6 +7,12 @@
 #include <ctime>
 
 
+#define CHECK_CUDA(call) { cudaError_t e = (call); if (e != cudaSuccess) { \
+    std::cerr << "CUDA error: " << cudaGetErrorString(e) << " at " << __FILE__ << ":" << __LINE__ << std::endl; exit(1);} }
+#define CHECK_CUBLAS(call) { cublasStatus_t s = (call); if (s != CUBLAS_STATUS_SUCCESS) { \
+    std::cerr << "cuBLAS error at " << __FILE__ << ":" << __LINE__ << std::endl; exit(1);} }
+
+
 
 // ----------------------------
 // Kernel 1: Basic Matmul
